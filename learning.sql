@@ -142,3 +142,61 @@ select * from customer join orders on customer.cid = orders.cid
 select customer.cid,cname,orderdate from customer join orders where customer.cid = orders.cid
 select * from customer left join orders on customer.cid = orders.cid;
 select customer.cid, cname,orderdate from customer left join orders on customer.cid = orders.cid;
+rename table auth to users;
+
+-- Alter statements
+alter table customer add place varchar(20);
+alter table customer modify column place int; 
+alter table customer rename column place to location;
+alter table customer drop column location;
+
+
+-- we want to create a book shop database. in this database we will create a 2 tables, one for the auther
+-- and second for the books. auther can create multiple books but once book only is created by one auther.
+-- auther table desc
+-- name, description, place, email
+-- book table desc
+-- name, description, lang, createdBy ( auther ).
+
+-- create database 
+create database book_shop;
+use book_shop;
+
+-- auther table.
+create table authers(
+    id int not null auto_increment primary key,
+    name varchar(32),
+    description varchar(50),
+    place varchar(50),
+    email varchar(30)
+)
+
+-- create book table
+create table books(
+    id int not null auto_increment primary key,
+    description varchar(50),
+    lang varchar(3),
+    createdBy int not null,
+    foreign key(createdBy) references authers(id)
+)
+
+-- insert into authers table
+insert into authers(name, description, place, email)
+values("Dheeraj singh rawat", "some demo description", "New Delhi, Chirag Delhi, Delhi 110017","dheeraj123@gmail.com");
+
+-- insert into books table
+insert into books(description, lang, createdBy)
+values("this is the my first book description", "ENG", 1)
+values("this is the my second book description", "UK", 1)
+
+select * from authers,books where authers.id = books.createdBy
+select * from authers join books on authers.id = books.createdBy
+
+delete from books where id = 3
+
+-- return all the authers and the created books.
+select * from authers left join books on authers.id = books.createdBy;
+select * from authers right join books on authers.id = books.createdBy;
+
+-- return all the books and creators.
+select * from books left join authers on books.createdBy = authers.id;
