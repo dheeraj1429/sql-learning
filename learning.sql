@@ -98,3 +98,47 @@ VALUES("dheeraj", "Rawat", 23);
 UPDATE student SET age = 20 WHERE age >= 20;
 DELETE FROM student WHERE id = 1;
 SELECT Price, Price+1 As addOneMore FROM Products;
+create table employees(
+	id int not null auto_increment,
+    name varchar(30),
+    experience int,
+    primary key(id)
+)
+
+insert into employees (name, experience)
+values("Dheeraj singh rawat", 3)
+
+
+-- Data types
+/*
+    there is three categories of data types
+    string
+    number
+    date and time data types
+*/
+
+
+create table customer(
+    cid int not null auto_increment primary key,
+    cname varchar(30),
+    cemail varchar(20),
+)
+
+create table orders(
+    oid int not null auto_increment primary key,
+    orderdate date,
+    cid int,
+    foreign key(cid) references customer(cid)
+)
+
+insert into customer(cname, cemail)
+values('dheeraj', "@gmail.com");
+
+insert into orders(orderdate, cid)
+values('2000-12-23', 1)
+
+select * from customer, orders where customer.cid = orders.cid
+select * from customer join orders on customer.cid = orders.cid
+select customer.cid,cname,orderdate from customer join orders where customer.cid = orders.cid
+select * from customer left join orders on customer.cid = orders.cid;
+select customer.cid, cname,orderdate from customer left join orders on customer.cid = orders.cid;
