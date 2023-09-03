@@ -200,3 +200,10 @@ select * from authers right join books on authers.id = books.createdBy;
 
 -- return all the books and creators.
 select * from books left join authers on books.createdBy = authers.id;
+
+SELECT COUNT(CustomerName) FROM Customers
+SELECT Country, Count(Country) FROM Customers group by Country
+SELECT SUM(Price), CategoryID FROM Products GROUP BY CategoryID;
+SELECT SUM(Price) AS price_total, Price AS price FROM Products GROUP BY Price HAVING COUNT(price) >= 2
+SELECT SUM(Price) AS price_total, Price AS price FROM Products GROUP BY Price HAVING COUNT(price) >= 2 ORDER BY price_total;
+SELECT * FROM Products WHERE Price >= 10 GROUP BY CategoryID HAVING CategoryID >= 4 ORDER BY CategoryID
