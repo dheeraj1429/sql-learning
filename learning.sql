@@ -207,3 +207,9 @@ SELECT SUM(Price), CategoryID FROM Products GROUP BY CategoryID;
 SELECT SUM(Price) AS price_total, Price AS price FROM Products GROUP BY Price HAVING COUNT(price) >= 2
 SELECT SUM(Price) AS price_total, Price AS price FROM Products GROUP BY Price HAVING COUNT(price) >= 2 ORDER BY price_total;
 SELECT * FROM Products WHERE Price >= 10 GROUP BY CategoryID HAVING CategoryID >= 4 ORDER BY CategoryID
+SELECT ProductID FROM Products UNION  SELECT CustomerID FROM Customers;
+
+-- Working with json data in sql
+update auth set jsonData ='[{"luckyNumber": [1,2,3,4,5], "jackpotBallNumber": 10}]' where id = 1
+SELECT JSON_EXTRACT(jsonData, "$[0]")
+FROM auth WHERE jsonData -> "$[0].jackpotBallNumber" = 10;
